@@ -1,18 +1,18 @@
 const express = require('express');
 const app = express();
 require('dotenv').config()
+const cors = require('cors');
 
 // modules of diff
 const {connection} = require('./config/db');
 const {userRouter} = require('./routes/user.routes');
 const {picRouter} = require('./routes/pics.routes')
-const cors = require('cors');
 
 // routes
+app.use(cors());
 app.use(express.json());
 app.use('/users',userRouter);
 app.use('/pics',picRouter)
-app.use(cors());
 
 app.get('/',(req,res)=> {
    res.send({msg: "welcome to the server"});
